@@ -1,0 +1,28 @@
+// including requred modules and libraries
+const express = require('express');
+require('dotenv').config();
+const PORT = process.env.port || 8000;
+
+// creating server
+const app = express();
+
+// setting view engine
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+// basic utilities for url encoding, decoding
+app.use(express.urlencoded());
+// using assets folder for static files serves to browser
+app.use(express.static('./assets'));
+
+// setting route 
+app.use('/', require('./routes/index.js'));
+
+// server is listening any requests
+app.listen(PORT, function(err){
+    if(err){
+        console.log(err);
+        return;
+    }
+    console.log("Server is up and running at port", PORT);
+})
