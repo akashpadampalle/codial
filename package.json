@@ -1,0 +1,11 @@
+{
+  "name": "codial",
+  "version": "1.0.0",
+  "description": "social media site to learn mongoose, express and nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akash Padampalle",
+  "license": "ISC"
+}
