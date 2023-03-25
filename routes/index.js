@@ -5,7 +5,8 @@ const Router = express.Router();
 // including controller
 const controller = require('../controllers/controls');
 
-Router.get('/welcome', controller.welcome);
+Router.get('/login-form', controller.loginForm);
+Router.get('/signup-form', controller.signupForm);
 
 
 

@@ -1,5 +1,15 @@
 
 // testing welcome page
-module.exports.welcome = function(req, res){
-    res.send('<h1>welcome... </h1>');
+// module.exports.welcome = function(req, res){
+//     res.send('<h1>welcome... </h1>');
+// }
+
+// login form controller
+module.exports.loginForm = function(req, res){
+    res.render('login');
+}
+
+// signup form controller
+module.exports.signupForm = function(req, res){
+    res.render('signup');
 }
