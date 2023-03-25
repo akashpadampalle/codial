@@ -1,11 +1,25 @@
 {
   "name": "codial",
   "version": "1.0.0",
-  "description": "social media site to learn mongoose, express and nodejs",
+  "description": "social media website to learn concepts mongoose, express and nodejs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akashpadampalle/codial.git"
+  },
   "author": "Akash Padampalle",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akashpadampalle/codial/issues"
+  },
+  "homepage": "https://github.com/akashpadampalle/codial#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "nodemon": "^2.0.22"
+  }
 }
