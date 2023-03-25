@@ -6,10 +6,14 @@
 
 // login form controller
 module.exports.loginForm = function(req, res){
-    res.render('login');
+    res.render('login', {
+        title: "Codial | login"
+    });
 }
 
 // signup form controller
 module.exports.signupForm = function(req, res){
-    res.render('signup');
+    res.render('signup', {
+        title: "Codial | signup"
+    });
 }

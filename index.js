@@ -11,8 +11,10 @@ const User = require("./models/user");
 const app = express();
 
 // setting view engine
+app.use(require("express-ejs-layouts"));
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.set("layout", 'layout');
 
 // basic utilities for url encoding, decoding
 app.use(express.urlencoded());
