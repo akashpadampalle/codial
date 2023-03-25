@@ -10,16 +10,17 @@ const User = require("./models/user");
 // creating server
 const app = express();
 
+// basic utilities for url encoding, decoding
+app.use(express.urlencoded());
+// using assets folder for static files serves to browser
+
+app.use(express.static("./assets"));
+
 // setting view engine
 app.use(require("express-ejs-layouts"));
 app.set("view engine", "ejs");
 app.set("views", "views");
-app.set("layout", 'layout');
-
-// basic utilities for url encoding, decoding
-app.use(express.urlencoded());
-// using assets folder for static files serves to browser
-app.use(express.static("./assets"));
+app.set("layout", "layout");
 
 // setting route
 app.use("/", require("./routes/index.js"));

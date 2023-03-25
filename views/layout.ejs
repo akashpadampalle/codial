@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-  </head>
-  <link rel="stylesheet" href="./style.css" />
-  <body>
-    <%- include('./header') %>
-    <%- body %> 
-    <%- include('./footer') %>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <%- include('./header') %>
+    <%- body %>
+      <%- include('./footer') %>
+</body>
+
 </html>
