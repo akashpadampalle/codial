@@ -17,6 +17,30 @@ module.exports.signupForm = function (req, res) {
 // create user
 module.exports.create = function (req, res) {
   // TODO create user
+  try {
+    const { password, confirm_password } = req.body;
+
+    if (password != confirm_password) {
+      //if password does not match raise an error
+      throw new Error("password and confirm password are not matching");
+    } else {
+      // if password match check if user is already exist
+      const user = await User.findOne({ email: req.body.email });
+      if (user) throw new Error("email has been already used");
+
+      // if user is unique then create entry to the database
+      const createdUser = await User.create(req.body);
+
+      // if there any error from database
+      if (!createdUser) throw new Error("Unable to create user");
+      console.log(createdUser);
+
+      res.redirect("/form/login");
+    }
+  } catch (error) {
+    console.error("Error: ", error.message);
+    res.redirect("back");
+  }
 };
 
 // create session for login user
