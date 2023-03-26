@@ -3,12 +3,18 @@ const express = require("express");
 require("dotenv").config();
 const PORT = process.env.port || 8000;
 
+// read cookies
+const cookieParser = require("cookie-parser");
+
 //including database and model
 const db = require("./config/dbconnection");
 const User = require("./models/user");
 
 // creating server
 const app = express();
+
+//use to check cookies
+app.use(cookieParser());
 
 // basic utilities for url encoding, decoding
 app.use(express.urlencoded());
