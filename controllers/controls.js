@@ -1,3 +1,4 @@
+const { Error } = require("mongoose");
 const User = require("../models/user");
 
 // login form controller
@@ -33,8 +34,7 @@ module.exports.create = async function (req, res) {
 
       // if there any error from database
       if (!createdUser) throw new Error("Unable to create user");
-      console.log(createdUser);
-
+      console.log(`Log: user created with name ${createdUser.name}`);
       res.redirect("/form/login");
     }
   } catch (error) {
@@ -55,7 +55,8 @@ module.exports.createSession = async function (req, res) {
       if (user.password == req.body.password) {
         // create a session if password matches
         res.cookie("user_id", user._id);
-        res.render("user-home", { title: "Codial | home", user: user });
+        // res.render("user-home", { title: "Codial | home", user: user });
+        res.redirect("/user/profile");
       } else {
         // if password does not match
         throw new Error("wrong password");
@@ -67,5 +68,38 @@ module.exports.createSession = async function (req, res) {
   } catch (error) {
     console.log("Error: ", error.message);
     res.redirect("back");
+  }
+};
+
+// user profile action
+module.exports.profile = async function (req, res) {
+  try {
+    const userId = req.cookies.user_id;
+    // check if user_id is set in cookie or not
+    if (userId != undefined) {
+      // if user id is defined in cookie check if it is valide id or not
+      const user = await User.findById(userId);
+
+      if (user) {
+        res.render("user-home", { title: "Codial | Home", user: user });
+      } else {
+        throw new Error("wrong user id");
+      }
+    } else {
+      throw new Error("user id is not found");
+    }
+  } catch (error) {
+    console.log("Error: ", error.message);
+    res.redirect("/form/login");
+  }
+};
+
+module.exports.signout = function (req, res) {
+  try {
+    // deleting
+    res.cookie("user_id", "", { expires: new Date(0) });
+    res.redirect("/form/login");
+  } catch (error) {
+    console.log("Error: ", error.message);
   }
 };

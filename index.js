@@ -2,6 +2,7 @@
 const express = require("express");
 require("dotenv").config();
 const PORT = process.env.port || 8000;
+const cookieParser = require("cookie-parser");
 
 //including database and model
 const db = require("./config/dbconnection");
@@ -9,6 +10,9 @@ const User = require("./models/user");
 
 // creating server
 const app = express();
+
+// to read and write cookie use middleware
+app.use(cookieParser());
 
 // basic utilities for url encoding, decoding
 app.use(express.urlencoded());
