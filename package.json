@@ -4,6 +4,7 @@
   "description": "social media website to learn concepts mongoose, express and nodejs",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

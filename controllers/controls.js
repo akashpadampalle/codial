@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require("../models/user");
 
 // login form controller
 module.exports.loginForm = function (req, res) {
@@ -15,7 +15,7 @@ module.exports.signupForm = function (req, res) {
 };
 
 // create user
-module.exports.create = function (req, res) {
+module.exports.create = async function (req, res) {
   // TODO create user
   try {
     const { password, confirm_password } = req.body;
@@ -44,7 +44,7 @@ module.exports.create = function (req, res) {
 };
 
 // create session for login user
-module.exports.createSession = function (req, res) {
+module.exports.createSession = async function (req, res) {
   // TODO create user session
   try {
     // check if user existed or not
