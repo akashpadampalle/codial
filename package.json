@@ -1,10 +1,9 @@
 {
   "name": "codial",
   "version": "1.0.0",
-  "description": "social media website to learn concepts mongoose, express and nodejs",
+  "description": "basic social media website to learn mongodb, mongoose, express, ejs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,14 +15,5 @@
   "bugs": {
     "url": "https://github.com/akashpadampalle/codial/issues"
   },
-  "homepage": "https://github.com/akashpadampalle/codial#readme",
-  "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "express-ejs-layouts": "^2.5.1",
-    "mongoose": "^7.0.3",
-    "nodemon": "^2.0.22"
-  }
+  "homepage": "https://github.com/akashpadampalle/codial#readme"
 }
