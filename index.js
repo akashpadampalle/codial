@@ -1,11 +1,14 @@
 const express = require('express');
+const db = require('./configs/db_connection');
 const PORT = process.env.PORT || 8000;
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.end('<h1>welcome</h1>');
-});
+// setting up ejs
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.use('/', require('./routers/index'));
 
 app.listen(PORT, (err) => {
     if(err){
