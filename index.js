@@ -12,7 +12,7 @@ app.use('/', require('./routers/index'));
 
 app.listen(PORT, (err) => {
     if(err){
-       console.log(err); 
+       console.log(`error while starting server ${err}`); 
        return;
     }
 

@@ -1,9 +1,16 @@
 const express = require('express');
-const router = express.Router();
-const homeController = require('../controllers/home_controllers');
 
-router.get('/', homeController.homepage);
-router.get('/login', homeController.login);
-router.get('/signup', homeController.signup);
+const router = express.Router();
+const homeController = require('../controllers/home_controller');
+
+console.log('router loaded');
+
+
+router.get('/', homeController.home);
+router.use('/users', require('./users'));
+
+// for any further routes, access from here
+// router.use('/routerName', require('./routerfile));
+
 
 module.exports = router;
