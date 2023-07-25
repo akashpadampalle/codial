@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codial</title>
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <%- style %>
 </head>
 
@@ -12,8 +15,9 @@
 
     <%- include('_header') %>
 
+    <main id="layout-main">
     <%- body %>
-    
+    </main>
     <%- include('_footer') %>
 
     <%- script %>
