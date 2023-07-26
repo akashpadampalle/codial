@@ -17,11 +17,27 @@ module.exports.create = async function (req, res) {
             if (comment) {
                 post.comments.push(comment);
                 post.save();
-            } 
+            }
         }
     } catch (err) {
         console.log(`error in creating comment ${err}`);
     } finally {
         res.redirect('back');
     }
+}
+
+
+module.exports.destroy = async function (req, res) {
+    try {
+        const comment = await Comment.findById(req.params.id);
+        if (comment && comment.user == req.user.id) {
+            await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
+            await Comment.findByIdAndDelete(req.params.id);
+        }
+    } catch (err) {
+        console.log(`error accure while destroying comment ${err}`);
+    } finally {
+        res.redirect('back');
+    }
+
 }
