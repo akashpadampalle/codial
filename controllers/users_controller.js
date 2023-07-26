@@ -1,30 +1,32 @@
 const User = require('../models/user');
 
-module.exports.profile = async function (req, res) {
+module.exports.profile = async (req, res) => {
     try {
+
         const user = await User.findById(req.params.id);
         res.render('user_profile', {
             title: 'Codial | Profile',
             profile_user: user
         });
+
     } catch (err) {
         console.log(`error in users profile ${err}`);
         return res.redirect('back');
     }
 }
 
-module.exports.update = async function(req, res){
-    try{
+module.exports.update = async (req, res) =>{
+    try {
         await User.findByIdAndUpdate(req.user.id, req.body);
         res.redirect('back');
-    }catch(err){
+    } catch (err) {
         console.log(`error while updating user ${err}`);
         res.status(401).send('Unauthorized');
     }
 }
 
 // render the signup page
-module.exports.signUp = function (req, res) {
+module.exports.signUp = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/users/profile');
     }
@@ -32,7 +34,7 @@ module.exports.signUp = function (req, res) {
 }
 
 // render the singin page
-module.exports.signIn = function (req, res) {
+module.exports.signIn =  (req, res) =>{
     if (req.isAuthenticated()) {
         return res.redirect('/users/profile');
     }
@@ -40,7 +42,7 @@ module.exports.signIn = function (req, res) {
 }
 
 // get the sign up data
-module.exports.create = async function (req, res) {
+module.exports.create = async (req, res) =>{
     try {
         if (req.body.password !== req.body.confirm_password) {
             return res.redirect('back');
@@ -63,12 +65,12 @@ module.exports.create = async function (req, res) {
 }
 
 // sign in and create a session for user
-module.exports.createSession = function (req, res) {
+module.exports.createSession =  (req, res) => {
     return res.redirect('/');
 }
 
 
-module.exports.destroySession = function (req, res) {
+module.exports.destroySession =  (req, res) => {
     req.logout(function (err) { });
     return res.redirect('/');
 }

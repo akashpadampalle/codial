@@ -2,7 +2,7 @@ const Comment = require('../models/comment');
 const Post = require('../models/post');
 
 
-module.exports.create = async function (req, res) {
+module.exports.create = async (req, res) => {
 
     try {
         const post = await Post.findById(req.body.post);
@@ -27,13 +27,16 @@ module.exports.create = async function (req, res) {
 }
 
 
-module.exports.destroy = async function (req, res) {
+module.exports.destroy = async (req, res) => {
     try {
+
         const comment = await Comment.findById(req.params.id);
+
         if (comment && comment.user == req.user.id) {
-            await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
+            await Post.findByIdAndUpdate(comment.post, { $pull: { comments: req.params.id } });
             await Comment.findByIdAndDelete(req.params.id);
         }
+
     } catch (err) {
         console.log(`error accure while destroying comment ${err}`);
     } finally {
