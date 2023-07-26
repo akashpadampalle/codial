@@ -2,8 +2,9 @@ const User = require('../models/user');
 
 module.exports.profile = async (req, res) => {
     try {
-
         const user = await User.findById(req.params.id);
+        req.flash('success', `visited profile of ${user.name}`)
+
         res.render('user_profile', {
             title: 'Codial | Profile',
             profile_user: user
@@ -66,11 +67,17 @@ module.exports.create = async (req, res) =>{
 
 // sign in and create a session for user
 module.exports.createSession =  (req, res) => {
+    req.flash('success', 'logged in successfully');
     return res.redirect('/');
 }
 
 
-module.exports.destroySession =  (req, res) => {
-    req.logout(function (err) { });
-    return res.redirect('/');
+module.exports.destroySession = (req, res, next) => {
+
+    req.logout(function(err) {
+        req.flash('success', 'you logged out !')
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+
 }
