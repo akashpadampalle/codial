@@ -1,7 +1,26 @@
 const User = require('../models/user');
 
-module.exports.profile = function (req, res) {
-    res.render('user_profile', { title: 'Codial | Profile' })
+module.exports.profile = async function (req, res) {
+    try {
+        const user = await User.findById(req.params.id);
+        res.render('user_profile', {
+            title: 'Codial | Profile',
+            profile_user: user
+        });
+    } catch (err) {
+        console.log(`error in users profile ${err}`);
+        return res.redirect('back');
+    }
+}
+
+module.exports.update = async function(req, res){
+    try{
+        await User.findByIdAndUpdate(req.user.id, req.body);
+        res.redirect('back');
+    }catch(err){
+        console.log(`error while updating user ${err}`);
+        res.status(401).send('Unauthorized');
+    }
 }
 
 // render the signup page
@@ -50,6 +69,6 @@ module.exports.createSession = function (req, res) {
 
 
 module.exports.destroySession = function (req, res) {
-    req.logout(function (err) {});
+    req.logout(function (err) { });
     return res.redirect('/');
 }
