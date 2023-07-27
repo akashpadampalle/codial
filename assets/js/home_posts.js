@@ -78,6 +78,13 @@
         });
     }
 
+    // add click event to every element having delete-post-button class 
+    const deletePostButtons = $('.delete-post-button');
+    deletePostButtons.each((index, item)=>{
+        deletePost(item);
+    })
+
+
     let flashNoty = function(type, message){
         new Noty({
             theme: 'relax',
