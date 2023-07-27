@@ -12,12 +12,16 @@
                 success: function (data) {
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
-                    deletePost($(' .delete-post-button', newPost))
+                    deletePost($(' .delete-post-button', newPost));
+                    flashNoty('success', data.message);
                 },
                 error: function (error) {
                     console.log(error.responseText);
+                    flashNoty('error', error.responseText);
                 }
             });
+
+            newPostForm[0].reset();
 
         });
     }
@@ -64,12 +68,24 @@
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                     $(`#post-${data.data.post_id}`).remove();
+                    flashNoty('success', data.message);
                 },
                 error: function(error){
-                    console.log(error.responseText)
+                    console.log(error.responseText);
+                    flashNoty('error', error.responseText);
                 }
             })
         });
+    }
+
+    let flashNoty = function(type, message){
+        new Noty({
+            theme: 'relax',
+            text: message,
+            type: type,
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
     }
 
     createPost();
