@@ -8,7 +8,9 @@ module.exports.create = async (req, res) => {
             user: req.user._id
         });
 
-        if(req.xhr){
+        await post.populate({path: 'user', select: 'name'})
+
+        if (req.xhr) {
             return res.status(200).json({
                 data: {
                     post: post
@@ -24,7 +26,7 @@ module.exports.create = async (req, res) => {
         req.flash('error', err);
         return res.redirect('back');
 
-    } 
+    }
 }
 
 
@@ -37,13 +39,21 @@ module.exports.destroy = async (req, res) => {
             await Post.findByIdAndDelete(post.id);
             await Comment.deleteMany({ post: req.params.id })
 
-        req.flash('success', 'post deleted')
+            if(req.xhr){
+                return res.status(200).json({
+                    data: {
+                        post_id: req.params.id
+                    },
+                    message: 'post deleted'
+                })
+            }
 
+            req.flash('success', 'post deleted')
+            res.redirect('back');
         }
 
     } catch (err) {
         req.flash('error', err);
-    } finally {
         res.redirect('back');
     }
 }
