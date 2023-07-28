@@ -29,6 +29,8 @@ app.use(sassMiddleware({
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'assets')));
+// make the uploads path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 // setting up ejs
 app.use(layout);

@@ -30,12 +30,15 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
     }
 })
 
 //static methods
-userSchema.statics.uploadedAvatar = multer({storage: storage}).single('avatar')
+userSchema.statics.uploadedAvatar = multer({
+    storage: storage,
+    limits: { fileSize: (200 * 1024) }
+}).single('avatar');
 userSchema.statics.avatarPath = AVATAR_PATH;
 
 

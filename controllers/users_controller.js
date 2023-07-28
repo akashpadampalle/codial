@@ -1,4 +1,6 @@
+const path = require('path');
 const User = require('../models/user');
+const fs = require('fs');
 
 module.exports.profile = async (req, res) => {
     try {
@@ -24,8 +26,19 @@ module.exports.update = async (req, res) =>{
             user.name = req.body.name;
             user.email = req.body.email;
 
+            
 
             if(req.file){
+
+
+                if(user.avatar){
+                    try{fs.unlinkSync(path.join(__dirname, '..', user.avatar))}catch(err){
+                        /*  explecitly supressing error
+                            if there is no file found to delete then we don't have to worry 
+                        */
+                    }
+                }
+
                 // this is the saving path of uploaded file into the avatar field in the user
                 user.avatar = User.avatarPath + '/' + req.file.filename
             }
