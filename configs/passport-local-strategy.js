@@ -39,7 +39,7 @@ passport.deserializeUser( async function(id, done){
     }
 
     return done(null, user);
-})
+});
 
 
 // check if user in authenticated
